@@ -51,6 +51,25 @@ app.put('/api/games/:id', (req, res) => {
     });
 });
 
+app.post('/api/games/search', (req, res) => {
+  const { name, platform } = req.body;
+  const where = {};
+  if (typeof name === 'string' && name.length > 0) {
+    where.name = {
+      [db.Sequelize.Op.like]: `%${name}%`,
+    };
+  }
+  if (typeof platform === 'string' && platform.length > 0) {
+    where.platform = platform;
+  }
+  return db.Game.findAll({ where })
+    .then((game) => res.send(game))
+    .catch((err) => {
+      console.log('***Error searching for games', JSON.stringify(err));
+      return res.status(400).send(err);
+    });
+});
+
 app.listen(3000, () => {
   console.log('Server is up on port 3000');
 });
