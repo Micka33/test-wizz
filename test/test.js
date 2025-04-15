@@ -207,16 +207,6 @@ describe('POST /api/games/search', () => {
         }
       });
   });
-
-  // DONE: add tests for the search endpoint
-  // DONE: add tests for the search endpoint without params
-  // DONE: add tests for the search endpoint with a name
-  // DONE: add tests for the search endpoint with a platform
-  // DONE: add tests for the search endpoint with a name and platform
-  // DONE: add tests for the search endpoint with a lowercase name and platform
-  // DONE: add tests for the search endpoint with a uppercase name and platform
-  // DONE: add tests for the search endpoint with a partial name
-
   it('returns all games', (done) => {
     request(app)
       .post('/api/games/search')
@@ -313,7 +303,6 @@ describe('POST /api/games/search', () => {
         return done();
       });
   });
-
   // This is equivalent to a afterAll hook in Jest
   // here we remove the searchable games from the database as we don't need them anymore
   it('removes searchable games', (done) => {
