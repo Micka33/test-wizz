@@ -320,3 +320,21 @@ describe('POST /api/games/search', () => {
       });
   });
 });
+
+/**
+ * Testing populate with top 100 games endpoint
+ */
+describe('POST /api/games/populate', () => {
+  it('populates the database with the top 100 games of each platform', (done) => {
+    request(app)
+      .post('/api/games/populate')
+      .set('Accept', 'application/json')
+      .expect(200)
+      .end((err, result) => {
+        if (err) return done(err);
+        assert.strictEqual(result.body.android.success, true);
+        assert.strictEqual(result.body.ios.success, true);
+        return done();
+      });
+  });
+});

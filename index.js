@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models');
+const PopulateWithTopGamesPerPlateformService = require('./services/populateWithTopGamesPerPlateform');
+
+const env = process.env.NODE_ENV || 'development';
+const appConfig = require('./config/appConfig.json')[env];
 
 const app = express();
 
@@ -65,7 +69,18 @@ app.post('/api/games/search', (req, res) => {
   return db.Game.findAll({ where })
     .then((game) => res.send(game))
     .catch((err) => {
-      console.log('***Error searching for games', JSON.stringify(err));
+      console.log('***Error searching for games', err);
+      return res.status(400).send(err);
+    });
+});
+
+app.post('/api/games/populate', (_req, res) => {
+  const { androidURL, iosURL } = appConfig;
+  const service = new PopulateWithTopGamesPerPlateformService(androidURL, iosURL, db);
+  return service.call()
+    .then((serviceResponse) => res.send(serviceResponse))
+    .catch((err) => {
+      console.log('***Error populating games', err);
       return res.status(400).send(err);
     });
 });

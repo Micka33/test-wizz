@@ -1,0 +1,14 @@
+{
+  "development": {
+    "androidURL": "https://interview-marketing-eng-dev.s3.eu-west-1.amazonaws.com/android.top100.json",
+    "iosURL": "https://interview-marketing-eng-dev.s3.eu-west-1.amazonaws.com/ios.top100.json"
+  },
+  "test": {
+    "androidURL": "https://jsonplaceholder.typicode.com/users?id=none",
+    "iosURL": "https://jsonplaceholder.typicode.com/users?id=none"
+  },
+  "production": {
+    "androidURL": "https://interview-marketing-eng-dev.s3.eu-west-1.amazonaws.com/android.top100.json",
+    "iosURL": "https://interview-marketing-eng-dev.s3.eu-west-1.amazonaws.com/ios.top100.json"
+  }
+}
